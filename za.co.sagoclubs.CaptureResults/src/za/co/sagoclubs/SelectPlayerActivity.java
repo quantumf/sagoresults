@@ -65,6 +65,7 @@ public class SelectPlayerActivity extends Activity {
         lsvSelectPlayer = (ListView)findViewById(R.id.lsvSelectPlayer);
         PlayerArrayAdapter adapter = new PlayerArrayAdapter(this, R.layout.list_item, InternetActions.getPlayerArray());        
         lsvSelectPlayer.setAdapter(adapter);
+        lsvSelectPlayer.setFastScrollEnabled(true);
     }
     
     private void showFavourites() {
@@ -72,6 +73,7 @@ public class SelectPlayerActivity extends Activity {
 		SharedPreferences preferences = getSharedPreferences("SETTINGS", 0);
         PlayerArrayAdapter adapter = new PlayerArrayAdapter(this, R.layout.list_item, InternetActions.getFavouritePlayers(preferences));        
         lsvSelectPlayer.setAdapter(adapter);
+        lsvSelectPlayer.setFastScrollEnabled(true);
     }
     
 }

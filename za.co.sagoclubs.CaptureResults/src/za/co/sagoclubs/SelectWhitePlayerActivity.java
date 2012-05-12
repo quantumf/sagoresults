@@ -1,17 +1,22 @@
 package za.co.sagoclubs;
 
+import java.util.List;
+
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ListView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.SectionIndexer;
 
 public class SelectWhitePlayerActivity extends Activity {
 
@@ -66,6 +71,7 @@ public class SelectWhitePlayerActivity extends Activity {
         lsvSelectWhitePlayer = (ListView)findViewById(R.id.lsvSelectWhitePlayer);
         PlayerArrayAdapter adapter = new PlayerArrayAdapter(this, R.layout.list_item, InternetActions.getPlayerArray());        
         lsvSelectWhitePlayer.setAdapter(adapter);
+        lsvSelectWhitePlayer.setFastScrollEnabled(true);
     }
     
     private void showFavourites() {
@@ -73,6 +79,8 @@ public class SelectWhitePlayerActivity extends Activity {
 		SharedPreferences preferences = getSharedPreferences("SETTINGS", 0);
         PlayerArrayAdapter adapter = new PlayerArrayAdapter(this, R.layout.list_item, InternetActions.getFavouritePlayers(preferences));        
         lsvSelectWhitePlayer.setAdapter(adapter);
+        lsvSelectWhitePlayer.setFastScrollEnabled(true);
     }
     
 }
+

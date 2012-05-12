@@ -21,14 +21,15 @@
 
     </LinearLayout>
 
-    <ListView
+    <za.co.sagoclubs.IndexableListView
         android:id="@+id/lsvSelectFavouritePlayers"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:addStatesFromChildren="true"
         android:choiceMode="multipleChoice"
-        android:headerDividersEnabled="true" android:layout_weight="0.9">
-    </ListView>
+        android:headerDividersEnabled="true" 
+        android:layout_weight="0.9">
+    </za.co.sagoclubs.IndexableListView>
 
     <LinearLayout
         android:layout_width="match_parent"

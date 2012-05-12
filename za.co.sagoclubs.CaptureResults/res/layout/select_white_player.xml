@@ -27,11 +27,11 @@
 
     </LinearLayout>
 
-    <ListView
+    <za.co.sagoclubs.IndexableListView
         android:id="@+id/lsvSelectWhitePlayer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
 
-    </ListView>
+    </za.co.sagoclubs.IndexableListView>
 
 </LinearLayout>

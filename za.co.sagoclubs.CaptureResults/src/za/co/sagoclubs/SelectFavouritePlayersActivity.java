@@ -24,11 +24,11 @@ public class SelectFavouritePlayersActivity extends Activity {
         
         lsvSelectFavouritePlayers = (ListView)findViewById(R.id.lsvSelectFavouritePlayers);
         btnSave = (Button)findViewById(R.id.btnSave);
-
         
         //PlayerArrayAdapter adapter = new PlayerArrayAdapter(this, R.layout.list_item, InternetActions.getPlayerArray());        
         PlayerArrayAdapter adapter = new PlayerArrayAdapter(this, R.layout.multi_select_list_item, InternetActions.getPlayerArray());
         lsvSelectFavouritePlayers.setAdapter(adapter);
+        lsvSelectFavouritePlayers.setFastScrollEnabled(true);
         loadSelection();
         
 		btnSave.setOnClickListener(new OnClickListener() {
