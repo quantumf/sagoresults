@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#ffffff"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#336699" >
+
+        <TextView
+            android:id="@+id/txtSelectWhitePlayer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#336699"
+            android:text="@string/game_details"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TableRow
+            android:id="@+id/tableRow5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/TextView05"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:focusable="false"
+                android:text="@string/winner_text_label"
+                android:textColor="#000000"
+                android:textStyle="bold"
+                android:textAppearance="?android:attr/textAppearanceMedium" android:layout_gravity="center_vertical"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+
+                <RadioGroup
+                    android:id="@+id/RadioGroup01"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="visible" >
+
+                    <RadioButton
+                        android:id="@+id/radioWhite"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:textColor="#000000"
+                        android:textStyle="bold"
+                        android:text="White" />
+
+                    <RadioButton
+                        android:id="@+id/radioBlack"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+		                android:textColor="#000000"
+		                android:textStyle="bold"
+                        android:text="Black" />
+
+                    <RadioButton
+                        android:id="@+id/radioDraw"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+		                android:textColor="#000000"
+		                android:textStyle="bold"
+                        android:text="Draw" />
+
+                </RadioGroup>
+            </LinearLayout>
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRow2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/TextView02"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/handicap_text_label"
+                android:textColor="#000000"
+                android:textStyle="bold"
+                android:textAppearance="?android:attr/textAppearanceMedium" 
+                android:layout_gravity="center_vertical"/>
+
+            <Spinner
+                android:id="@+id/spinnerHandicap"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:clipToPadding="false"
+                android:entries="@array/handicaplist"
+                android:prompt="@string/handicap_prompt" />
+
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRow1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/TextView01"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:focusable="false"
+                android:text="@string/komi_text_label"
+                android:textColor="#000000"
+                android:textStyle="bold"
+                android:textAppearance="?android:attr/textAppearanceMedium" android:layout_gravity="center_vertical"/>
+
+            <EditText
+                android:id="@+id/txtKomi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:inputType="numberDecimal" />
+
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRow4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/TextView04"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawingCacheQuality="high"
+                android:text="@string/weight_text_label"
+                android:textColor="#000000"
+                android:textStyle="bold"
+                android:textAppearance="?android:attr/textAppearanceMedium" android:layout_gravity="center_vertical"/>
+
+            <Spinner
+                android:id="@+id/spinnerWeight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:clipToPadding="false"
+                android:entries="@array/weightlist"
+                android:prompt="@string/game_weight_prompt" />
+
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRow3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/TextView03"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:focusable="false"
+                android:text="@string/notes_text_label"
+                android:textColor="#000000"
+                android:textStyle="bold"
+                android:textAppearance="?android:attr/textAppearanceMedium" android:layout_gravity="center_vertical"/>
+
+            <EditText
+                android:id="@+id/txtNotes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10" >
+
+                <requestFocus />
+            </EditText>
+
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRow6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/TextView06"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:focusable="false"
+                android:text="@string/date_text_label"
+                android:textColor="#000000"
+                android:textStyle="bold"
+                android:textAppearance="?android:attr/textAppearanceMedium" android:layout_gravity="center_vertical"/>
+
+            <EditText
+                android:id="@+id/txtDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:inputType="numberDecimal" />
+
+            <Button
+                android:id="@+id/btnChangeDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/change_date" />
+
+        </TableRow>
+
+    </TableLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <Button
+            android:id="@+id/btnSaveResult"
+	        style="@style/ButtonText"
+			android:background="@drawable/green_button"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="@string/save_game"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+
+</LinearLayout>

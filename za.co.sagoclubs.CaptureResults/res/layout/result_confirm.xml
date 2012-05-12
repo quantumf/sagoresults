@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#ffffff"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#336699" >
+
+        <TextView
+            android:id="@+id/txtResultConfirmed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#336699"
+            android:text="@string/result_confirmed"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/txtOutput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.90"
+        android:background="#ffffff"
+        android:ems="10"
+        android:inputType="textMultiLine"
+        android:textColor="#000000"
+		android:scrollbars="vertical"
+        android:textSize="10sp" />
+
+    <Button
+        android:id="@+id/btnUndo"
+        style="@style/ButtonText"
+		android:background="@drawable/red_button"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/undo"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/btnReturnToStart"
+        style="@style/ButtonText"
+		android:background="@drawable/blue_button"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/return_to_start"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/btnNewResult"
+        style="@style/ButtonText"
+		android:background="@drawable/green_button"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/capture_result"
+        android:textStyle="bold" />
+
+</LinearLayout>

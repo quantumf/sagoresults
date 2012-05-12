@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#ffffff"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#336699" >
+
+        <TextView
+            android:id="@+id/txtSelectWhitePlayer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#336699"
+            android:text="@string/app_name"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnCaptureResult"
+        style="@style/ButtonText"
+		android:background="@drawable/green_button"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/capture_result"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/btnDisplayLogFile"
+        style="@style/ButtonText"
+		android:background="@drawable/purple_button"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/display_log_file"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/btnSettings"
+        style="@style/ButtonText"
+		android:background="@drawable/yellow_button"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/settings" android:textStyle="bold"/>
+
+</LinearLayout>

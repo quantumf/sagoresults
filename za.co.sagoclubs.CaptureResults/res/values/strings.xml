@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">SAGO Results</string>
+    <string name="screen_title">Capture SAGO Results</string>
+    <string name="game_weight_prompt">Enter game weight</string>
+    <string name="handicap_prompt">Black stones on board before White\'s first move</string>
+    <string name="winner_text_label">Winner</string>
+    <string name="komi_text_label">Komi</string>
+    <string name="date_text_label">Date</string>
+    <string name="notes_text_label">Notes</string>
+    <string name="handicap_text_label">Handicap</string>
+    <string name="weight_text_label">Weight</string>
+    <string name="change_date">Change…</string>
+    <string name="save">Save</string>
+    <string name="save_game">Save Result</string>
+    <string name="capture_result">Capture Result</string>
+    <string name="settings">Settings</string>
+    <string name="user_name">User Name</string>
+    <string name="password">Password</string>
+    <string name="undo">Undo</string>
+    <string name="capture_another">Capture another?</string>
+    <string name="result_confirmed">Confirm Result</string>
+    <string name="undo_confirmed">Confirm Undo</string>
+    <string name="select_favourite_players">Select Favourite Players</string>
+    <string name="select_white_player">Select White Player</string>
+    <string name="select_black_player">Select Black Player</string>
+    <string name="game_details">Game Details</string>
+    <string name="favourites">Favourites</string>  
+    <string name="return_to_start">Home</string>  
+    <string name="player_logfile">Player Logfile</string>  
+    <string name="player">Player</string>  
+    <string name="select_player">Select Player</string>  
+    <string name="display_log_file">Display Log File</string>  
+    
+    <string-array name="weightlist">  
+        <item>Free (0)</item>  
+        <item>Internet (0.5)</item>  
+        <item>Normal (1)</item>  
+        <item>Tournament (1.5)</item>  
+    </string-array>  
+
+    <string-array name="handicaplist">  
+        <item>1 (Even)</item>  
+        <item>2</item>  
+        <item>3</item>  
+        <item>4</item>  
+        <item>5</item>  
+        <item>6</item>  
+        <item>7</item>  
+        <item>8</item>  
+        <item>9</item>  
+    </string-array>  
+    
+    <string-array name="winnerlist">  
+        <item>White</item>  
+        <item>Black</item>  
+        <item>Draw</item>  
+    </string-array>  
+    
+   
+</resources>
