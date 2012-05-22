@@ -48,9 +48,6 @@ public class InternetActions {
     		}
     	}
     	
-//    	list.add(new Player("jgelant", "James Gelant"));
-//    	list.add(new Player("cwelsh", "Chris Welsh"));
-
     	Player[] template = new Player[]{};
     	playerData = list.toArray(template);
     	Arrays.sort(playerData);
@@ -99,11 +96,12 @@ public class InternetActions {
     public static String getPreBlock(String url) {
     	HttpURLConnection c = openConnection(url);
         BufferedReader reader = null;
-        String result = ""; 
+        String result= "";
+        StringBuffer work = new StringBuffer(); 
         try {
             reader = new BufferedReader(new InputStreamReader(c.getInputStream(), "UTF-8"), 8192);
             for (String line; (line = reader.readLine()) != null;) {
-            	result = result + line + "\n";
+            	work.append(line + "\n");
             }
         } catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
@@ -113,6 +111,7 @@ public class InternetActions {
             if (reader != null) try { reader.close(); } catch (IOException logOrIgnore) {}
             c.disconnect();
         }
+        result = work.toString();
         int index = result.toLowerCase().indexOf("<pre>");
         if (index>0) {
         	result = result.substring(index+6);
@@ -143,19 +142,6 @@ public class InternetActions {
     
     private static ArrayList<String> getRawPlayerList() {
         HttpURLConnection c = openConnection("http://rank.sagoclubs.co.za/sed_script");
-//        HttpURLConnection c = null;
-//		try {
-//			url = new URL("http://rank.sagoclubs.co.za/sed_script");
-//
-//			c = (HttpURLConnection) url.openConnection();
-//			String basicAuth = "Basic " + new String(Base64.encode((userid+":"+password).getBytes(),Base64.NO_WRAP ));
-//			c.setRequestProperty ("Authorization", basicAuth);
-//			c.connect();
-//		} catch (MalformedURLException e) {
-//			e.printStackTrace();
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
         BufferedReader reader = null;
         ArrayList<String> list = new ArrayList<String>(); 
         try {

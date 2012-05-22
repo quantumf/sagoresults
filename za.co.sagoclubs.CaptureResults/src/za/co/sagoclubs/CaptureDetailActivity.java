@@ -9,6 +9,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.RadioButton;
@@ -47,6 +50,7 @@ public class CaptureDetailActivity extends Activity {
 
         addChangeButtonListener();
         addSaveResultButtonListener();
+        addSpinnerHandicapOnItemSelectedListener();
         
         txtKomi.setText("6.5");
         
@@ -72,6 +76,23 @@ public class CaptureDetailActivity extends Activity {
 			public void onClick(View v) {
 				showDialog(DATE_DIALOG_ID);
 			}
+		});
+	}
+
+	public void addSpinnerHandicapOnItemSelectedListener() {
+		spinnerHandicap.setOnItemSelectedListener(new OnItemSelectedListener() {
+		    @Override
+		    public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+				if (spinnerHandicap.getSelectedItemPosition()>0) {
+					txtKomi.setText("0.5");
+				}
+		    }
+
+		    @Override
+		    public void onNothingSelected(AdapterView<?> parentView) {
+		        // your code here
+		    }
+
 		});
 	}
 	
@@ -105,8 +126,7 @@ public class CaptureDetailActivity extends Activity {
 			Result.weight = "1.5";
 		}
 		Result.handicap = String.valueOf(spinnerHandicap.getSelectedItemPosition()+1);
-		Result.notes = txtNotes.getText().toString().trim();
-//		showDialog(SHOW_URI_DIALOG_ID);
+		Result.notes = txtNotes.getText().toString();
 	}
 	
 	private String addLeadingZero(String input) {

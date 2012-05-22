@@ -1,5 +1,8 @@
 package za.co.sagoclubs;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
 enum ResultState {
 	Enter, Confirm, Undo, Complete;
 }
@@ -56,7 +59,11 @@ public class Result {
 		uri = uri + "&day="+Result.day;
 		uri = uri + "&month="+Result.month;
 		uri = uri + "&year="+Result.year;
-		uri = uri + "&notes="+Result.notes;
+			try {
+				uri = uri + "&notes="+URLEncoder.encode(Result.notes, "utf-8");
+			} catch (UnsupportedEncodingException e) {
+				e.printStackTrace();
+			}
 		return uri;
 	}
 	

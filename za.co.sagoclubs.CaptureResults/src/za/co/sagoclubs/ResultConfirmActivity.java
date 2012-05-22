@@ -1,40 +1,54 @@
 package za.co.sagoclubs;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.Window;
 import android.widget.Button;
-import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class ResultConfirmActivity extends Activity {
 
-	private EditText txtOutput;
+	private TextView txtOutput;
 	private Button btnUndo;
 	private Button btnNewResult;
 	private Button btnReturnToStart;
+	private ProgressDialog dialog;
 	
 	@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
+
+		dialog = new ProgressDialog(this);
+
         setContentView(R.layout.result_confirm);
         
-        txtOutput = (EditText)findViewById(R.id.txtOutput);
+        txtOutput = (TextView)findViewById(R.id.txtOutput);
         txtOutput.setEnabled(false);
         btnUndo = (Button)findViewById(R.id.btnUndo);
         btnNewResult = (Button)findViewById(R.id.btnNewResult);
+        btnReturnToStart = (Button)findViewById(R.id.btnReturnToStart);
+
+        btnUndo.setVisibility(View.INVISIBLE);
+        btnNewResult.setVisibility(View.INVISIBLE);
+        btnReturnToStart.setVisibility(View.INVISIBLE);
 
         if (Result.resultState == ResultState.Enter) {
-        	InternetActions.openPage(Result.constructResultUri());
-        	String result = InternetActions.getPreBlock("http://rank.sagoclubs.co.za/refresh.html");
-        	txtOutput.setText(result);
-        	Result.setResultState(ResultState.Confirm);
+    		dialog.setMessage("Sending result to server...");
+    		dialog.setIndeterminate(true);
+    		dialog.setCancelable(false);
+    		dialog.show();
+        	new SaveResultTask().execute();
         }
-        
-		btnUndo.setOnClickListener(new OnClickListener() {
+
+    	btnUndo.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
                 Intent myIntent = new Intent(v.getContext(), UndoActivity.class);
@@ -45,13 +59,13 @@ public class ResultConfirmActivity extends Activity {
 		btnNewResult.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
+		        Result.setResultState(ResultState.Enter);
                 Intent myIntent = new Intent(v.getContext(), SelectWhitePlayerActivity.class);
                 myIntent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivityForResult(myIntent, 0);
 			}
 		});
 		
-        btnReturnToStart = (Button)findViewById(R.id.btnReturnToStart);
 
         btnReturnToStart.setOnClickListener(new OnClickListener() {
 			@Override
@@ -66,6 +80,7 @@ public class ResultConfirmActivity extends Activity {
             restoreProgress(savedInstanceState);
         }
         
+
 	}
 	
 	@Override
@@ -88,6 +103,25 @@ public class ResultConfirmActivity extends Activity {
         if (output!=null) {
 	    	txtOutput.setText(output);
         }
+	}
+	
+	private class SaveResultTask extends AsyncTask<Void, Void, String> {
+		protected String doInBackground(Void... v) {
+			setProgressBarIndeterminateVisibility(true);
+        	InternetActions.openPage(Result.constructResultUri());
+        	String result = InternetActions.getPreBlock("http://rank.sagoclubs.co.za/refresh.html");
+        	return result;
+	    }
+
+	    protected void onPostExecute(String result) {
+	    	setProgressBarIndeterminateVisibility(false);
+	    	dialog.hide();
+        	txtOutput.setText(result);
+        	Result.setResultState(ResultState.Confirm);
+            btnUndo.setVisibility(View.VISIBLE);
+            btnNewResult.setVisibility(View.VISIBLE);
+            btnReturnToStart.setVisibility(View.VISIBLE);
+	    }
 	}
 	
 }
