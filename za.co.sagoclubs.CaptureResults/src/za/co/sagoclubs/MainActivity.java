@@ -13,6 +13,7 @@ public class MainActivity extends Activity {
 	private Button btnSettings;
 	private Button btnCaptureResult;
 	private Button btnDisplayLogFile;
+	private Button btnPlayerRatings;
 	private boolean onCreateCalled = false;
 
 	@Override
@@ -20,8 +21,10 @@ public class MainActivity extends Activity {
 		super.onResume();
 		if (onCreateCalled) {
 			SharedPreferences preferences = getSharedPreferences("SETTINGS", 0);
-			btnCaptureResult.setEnabled(!(preferences.getString("username", "").equals("")));
-			btnDisplayLogFile.setEnabled(!(preferences.getString("username", "").equals("")));
+			btnDisplayLogFile.setVisibility((preferences.getString("username", "").equals("guest"))?View.INVISIBLE:View.VISIBLE);
+			btnCaptureResult.setVisibility((preferences.getString("username", "").equals("guest"))?View.INVISIBLE:View.VISIBLE);
+//			btnCaptureResult.setEnabled(!(preferences.getString("username", "").equals("guest")));
+//			btnDisplayLogFile.setEnabled(!(preferences.getString("username", "").equals("guest")));
 		}
 	}
 	
@@ -46,7 +49,7 @@ public class MainActivity extends Activity {
 		});
 
         btnDisplayLogFile = (Button) findViewById(R.id.btnDisplayLogFile);
-		btnDisplayLogFile.setEnabled(!(preferences.getString("username", "").equals("")));
+		btnDisplayLogFile.setVisibility((preferences.getString("username", "").equals("guest"))?View.INVISIBLE:View.VISIBLE);
 		btnDisplayLogFile.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -56,7 +59,7 @@ public class MainActivity extends Activity {
 		});
 
 		btnCaptureResult = (Button) findViewById(R.id.btnCaptureResult);
-		btnCaptureResult.setEnabled(!(preferences.getString("username", "").equals("")));
+		btnCaptureResult.setVisibility((preferences.getString("username", "").equals("guest"))?View.INVISIBLE:View.VISIBLE);
 		btnCaptureResult.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -66,6 +69,16 @@ public class MainActivity extends Activity {
 			}
 		});
 		
+		btnPlayerRatings = (Button) findViewById(R.id.btnPlayerRatings);
+		btnPlayerRatings.setEnabled(true);
+		btnPlayerRatings.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+                Intent myIntent = new Intent(v.getContext(), PlayerRatingsActivity.class);
+                startActivityForResult(myIntent, 0);
+			}
+		});
+
 		int width = btnCaptureResult.getWidth();
 		if (btnDisplayLogFile.getWidth()>width) {
 			width = btnDisplayLogFile.getWidth();

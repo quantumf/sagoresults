@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">SAGO Results</string>
-    <string name="screen_title">Capture SAGO Results</string>
+    <string name="app_name">SA Go</string>
     <string name="game_weight_prompt">Enter game weight</string>
     <string name="handicap_prompt">Black stones on board before White\'s first move</string>
     <string name="winner_text_label">Winner</string>
@@ -32,6 +31,7 @@
     <string name="player">Player</string>  
     <string name="select_player">Select Player</string>  
     <string name="display_log_file">Display Log File</string>  
+    <string name="player_ratings">Player Ratings</string>  
     
     <string-array name="weightlist">  
         <item>Free (0)</item>  
@@ -57,6 +57,7 @@
         <item>Black</item>  
         <item>Draw</item>  
     </string-array>  
+        <string name="south_african_go">South African Go</string>  
     
    
 </resources>

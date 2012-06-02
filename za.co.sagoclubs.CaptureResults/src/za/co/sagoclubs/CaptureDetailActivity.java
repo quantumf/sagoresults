@@ -10,7 +10,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -140,13 +139,8 @@ public class CaptureDetailActivity extends Activity {
 	protected Dialog onCreateDialog(int id) {
 		switch (id) {
 		case DATE_DIALOG_ID:
-		   // set date picker as current date
 		   return new DatePickerDialog(this, datePickerListener, 
                          Integer.parseInt(Result.year), Integer.parseInt(Result.month)-1, Integer.parseInt(Result.day));
-//		case SHOW_URI_DIALOG_ID:
-			//new AlertDialog.Builder(this).setMessage(Result.constructResultUri()).show();
-//			new AlertDialog.Builder(this).setMessage(Result.constructUndoUri()).show();
-//			break;
 	    }
 
 		return null;

@@ -1,12 +1,10 @@
 package za.co.sagoclubs;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import static za.co.sagoclubs.Constants.TAG;
 

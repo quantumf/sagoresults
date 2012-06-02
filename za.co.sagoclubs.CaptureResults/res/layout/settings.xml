@@ -87,6 +87,13 @@
         </TableRow>
     </TableLayout>
 
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Do not change the default values of &quot;guest&quot;/&quot;guest&quot; unless you have been given an admin account by an SA Go administrator"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
     <Button
         android:id="@+id/btnSelectFavouritePlayers"
         style="@style/ButtonText"

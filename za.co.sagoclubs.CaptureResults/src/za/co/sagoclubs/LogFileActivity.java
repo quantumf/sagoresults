@@ -2,6 +2,7 @@ package za.co.sagoclubs;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
@@ -57,6 +58,7 @@ public class LogFileActivity extends Activity {
 	private void restoreProgress(Bundle savedInstanceState) {
         String output = savedInstanceState.getString("output");
         if (output!=null) {
+        	txtOutput.setMovementMethod(new ScrollingMovementMethod());
         	txtOutput.setText("");
         	txtOutput.append(output);
         	scrollView.post(new Runnable()
@@ -69,10 +71,19 @@ public class LogFileActivity extends Activity {
         }
 	}
 
+	@Override
+	public void onPause() {
+		super.onPause();
+		if (dialog!=null) {
+			dialog.dismiss();
+		}
+	}
+	
 	private class LogFileTask extends AsyncTask<Void, Void, String> {
 		protected String doInBackground(Void... v) {
 			setProgressBarIndeterminateVisibility(true);
-        	String result = InternetActions.getPreBlock("http://rank.sagoclubs.co.za/showlog.cgi?name="+Result.logfile.getId());
+        	//String result = InternetActions.getPreBlock("http://rank.sagoclubs.co.za/showlog.cgi?name="+Result.logfile.getId());
+        	String result = InternetActions.getPreBlock("http://rank.sagoclubs.co.za/datafiles/"+Result.logfile.getId()+".recordsheet");
         	return result;
 	    }
 

@@ -49,6 +49,6 @@
         android:textColor="#000000"
         android:textSize="10sp"
         android:layout_weight="1.0"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:textAppearance="?android:attr/textAppearanceMedium" android:typeface="monospace" android:scrollHorizontally="true"/>
 </ScrollView>
 </LinearLayout>

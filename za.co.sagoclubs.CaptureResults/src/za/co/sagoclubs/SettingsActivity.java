@@ -6,10 +6,8 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.View.OnKeyListener;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -19,7 +17,6 @@ public class SettingsActivity extends Activity {
 	
 	private TextView txtUsername;
 	private TextView txtPassword;
-	private Button btnSave;
 	private Button btnSelectFavouritePlayers;
 	private boolean changed;
 	
@@ -34,6 +31,7 @@ public class SettingsActivity extends Activity {
         loadSettings();
         
         btnSelectFavouritePlayers = (Button) findViewById(R.id.btnSelectFavouritePlayers);
+		btnSelectFavouritePlayers.setVisibility(txtUsername.getText().toString().equals("guest")?View.INVISIBLE:View.VISIBLE);
 		btnSelectFavouritePlayers.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -67,15 +65,15 @@ public class SettingsActivity extends Activity {
 			editor.putString("username", txtUsername.getText().toString().trim());
 			editor.putString("password", txtPassword.getText().toString().trim());
 			editor.commit();
-			InternetActions.setUsername(preferences.getString("username", ""));
-			InternetActions.setPassword(preferences.getString("password", ""));
+			InternetActions.setUsername(preferences.getString("username", "guest"));
+			InternetActions.setPassword(preferences.getString("password", "guest"));
 		}
 	}
 	
 	private void loadSettings() {
 		SharedPreferences preferences = getSharedPreferences("SETTINGS", 0);
-		txtUsername.setText(preferences.getString("username", ""));
-		txtPassword.setText(preferences.getString("password", ""));
+		txtUsername.setText(preferences.getString("username", "guest"));
+		txtPassword.setText(preferences.getString("password", "guest"));
 	}
 	
 }

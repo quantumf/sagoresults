@@ -19,6 +19,7 @@ import static za.co.sagoclubs.Constants.TAG;
 public class InternetActions {
 
 	private static Player[] playerData = null;
+	private static Player[] playerRatingData = null;
 	private static String username="";
 	private static String password="";
 	
@@ -52,6 +53,16 @@ public class InternetActions {
     	playerData = list.toArray(template);
     	Arrays.sort(playerData);
     	return playerData;
+    }
+
+	public static Player[] getPlayerRatingsArray() {
+    	if (playerRatingData!=null) {
+    		return playerRatingData;
+    	}
+    	List<Player> list = getRawPlayerRatingsList();
+    	Player[] template = new Player[]{};
+    	playerRatingData = list.toArray(template);
+    	return playerRatingData;
     }
 
 	public static Player[] getFavouritePlayers(SharedPreferences preferences) {
@@ -140,7 +151,21 @@ public class InternetActions {
 		return c;
     }
     
-    private static ArrayList<String> getRawPlayerList() {
+    private static HttpURLConnection openUnsecuredConnection(String url) {
+        HttpURLConnection c = null;
+		try {
+			URL u = new URL(url);
+			c = (HttpURLConnection) u.openConnection();
+			c.connect();
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return c;
+    }
+    
+    private static List<String> getRawPlayerList() {
         HttpURLConnection c = openConnection("http://rank.sagoclubs.co.za/sed_script");
         BufferedReader reader = null;
         ArrayList<String> list = new ArrayList<String>(); 
@@ -158,6 +183,45 @@ public class InternetActions {
             c.disconnect();
         }
         return list;
+    }
+    
+    private static List<Player> getRawPlayerRatingsList() {
+        HttpURLConnection c = openUnsecuredConnection("http://www.sagoclubs.co.za/player-ratings/");
+        BufferedReader reader = null;
+    	List<Player> list = new ArrayList<Player>();
+        try {
+            reader = new BufferedReader(new InputStreamReader(c.getInputStream(), "UTF-8"), 8192);
+            for (String line; (line = reader.readLine()) != null;) {
+            	if (line.startsWith("<td><a href='/wp-content/playerrank.php?id=")) {
+            		Player player = getPlayerFromRatingLine(line);
+                	player.setRank(stripTD(reader.readLine().trim()));
+                	player.setIndex(stripTD(reader.readLine().trim()));
+                	player.setLastPlayedDate(stripTD(reader.readLine().trim()));
+                	list.add(player);
+            	}
+            }
+        } catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+            if (reader != null) try { reader.close(); } catch (IOException logOrIgnore) {}
+            c.disconnect();
+        }
+    	return list;
+    }
+    
+    private static String stripTD(String line) {
+    	String result = line.substring(4, line.indexOf("</td>"));
+    	return result;
+    }
+    
+    private static Player getPlayerFromRatingLine(String line) {
+    	String id = line.substring(43, line.indexOf("'",43));
+    	int nameIndexStart = line.indexOf("<img src='/wp-content/archive.gif' alt='' /></a>", 43)+48;
+    	String name = line.substring(nameIndexStart, line.indexOf("</td>", nameIndexStart));
+    	Player result = new Player(id, name);
+    	return result;
     }
     
 }
