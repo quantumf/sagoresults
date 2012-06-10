@@ -2,6 +2,8 @@ package za.co.sagoclubs;
 
 public class Player implements Comparable {
 	
+	public static PlayerSortOrder sortOrder = PlayerSortOrder.SORT_BY_NAME;
+	
 	private String id;
 	private String name;
 	private String rank;

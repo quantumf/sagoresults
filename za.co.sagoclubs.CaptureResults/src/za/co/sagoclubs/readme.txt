@@ -1,5 +1,19 @@
 Change Log
 
+Intended for next version (among others)
+*Retained game comment from previous game, to facilitate capturing the games from a tournament
+  * coded already, but display issue prevent this from working
+*Added sort by name option to the player rating list screen
+  * partially coded
+
+v2.1 (10/06/2012)
+
+* Changed player rating list to have a more modern look
+* Added a background colour change when clicking a list item to give better feedback
+* Added a launch icon
+* Removed keyboard popup after capturing a game result (admin only)
+* Fixed the disappearing buttons on the game result confirm/undo screen after changing orientation (admin only)
+
 v2.0 (02/06/2012)
 
 Remodeled as a general tool for all SA go players - capturing results turned into an admin-only function

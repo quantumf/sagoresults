@@ -6,8 +6,10 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnKeyListener;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -39,22 +41,28 @@ public class SettingsActivity extends Activity {
                 startActivityForResult(myIntent, 0);
 			}
 		});
-		
-		txtUsername.setOnClickListener(new OnClickListener() {
+
+		txtUsername.setOnKeyListener(new OnKeyListener() {
+
 			@Override
-			public void onClick(View v) {
+			public boolean onKey(View v, int keyCode, KeyEvent event) {
 				Log.d(TAG, "SettingsActivity.txtUsername.OnClick");
 				changed = true;
+				return false;
 			}
+			
 		});
 
-		changed = false;
-		
 	}
 
+	public void onResume() {
+		super.onResume();
+	}
+	
 	@Override
 	public void onPause() {
 		saveSettings();
+		changed = false;
 		super.onPause();
 	}
 	

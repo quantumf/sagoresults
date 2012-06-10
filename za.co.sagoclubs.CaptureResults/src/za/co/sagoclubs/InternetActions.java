@@ -55,10 +55,42 @@ public class InternetActions {
     	return playerData;
     }
 
+	private static List<Player> getTestPlayers() {
+		List<Player> list = new ArrayList<Player>();
+		Player p = new Player("victor", "Victor Chow");p.setRank("7d");p.setIndex("345");
+		list.add(p);
+		p = new Player("bengo", "Ben Gale");p.setRank("3d");p.setIndex("34");
+		list.add(p);
+		p = new Player("andrew", "Andrew Davies");p.setRank("3d");p.setIndex("622");
+		list.add(p);
+		p = new Player("sam", "Sam Scott");p.setRank("2d");p.setIndex("876");
+		list.add(p);
+		p = new Player("andre", "Andre Connell");p.setRank("2d");p.setIndex("-80");
+		list.add(p);
+		p = new Player("chris", "Chris Welsh");p.setRank("1d");p.setIndex("219");
+		list.add(p);
+		p = new Player("lloyd", "Lloyd Rubidge");p.setRank("1k");p.setIndex("-322");
+		list.add(p);
+		p = new Player("francois", "Francois van Niekerk");p.setRank("4k");p.setIndex("-33");
+		list.add(p);
+		p = new Player("paul", "Paul Steyn");p.setRank("5k");p.setIndex("0");
+		list.add(p);
+		p = new Player("stephen", "Stephen Martindale");p.setRank("10k");p.setIndex("909");
+		list.add(p);
+		p = new Player("rory", "Rory Shea");p.setRank("15k");p.setIndex("-995");
+		list.add(p);
+		return list;
+	}
+	
 	public static Player[] getPlayerRatingsArray() {
+		return getPlayerRatingsArray(PlayerSortOrder.SORT_BY_NAME);
+	}
+
+	public static Player[] getPlayerRatingsArray(PlayerSortOrder order) {
     	if (playerRatingData!=null) {
     		return playerRatingData;
     	}
+//    	List<Player> list = getTestPlayers();
     	List<Player> list = getRawPlayerRatingsList();
     	Player[] template = new Player[]{};
     	playerRatingData = list.toArray(template);

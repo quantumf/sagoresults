@@ -6,6 +6,8 @@ import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -13,6 +15,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -21,13 +24,14 @@ public class CaptureDetailActivity extends Activity {
 
 	private static final int DATE_DIALOG_ID = 999;
 	
-    private TextView txtDate;
-    private TextView txtKomi;
-    private TextView txtNotes;
+    private EditText txtDate;
+    private EditText txtKomi;
+    private EditText txtNotes;
     private Spinner spinnerWeight; 
     private Spinner spinnerHandicap; 
 	private Button btnChangeDate;
 	private Button btnSaveResult;
+	private Button btnPrevious;
 	private RadioButton radioWhite;
 	private RadioButton radioBlack;
     
@@ -39,15 +43,17 @@ public class CaptureDetailActivity extends Activity {
         
 		btnChangeDate = (Button) findViewById(R.id.btnChangeDate);
 		btnSaveResult = (Button) findViewById(R.id.btnSaveResult);
-        txtKomi = (TextView)findViewById(R.id.txtKomi);
-        txtDate = (TextView)findViewById(R.id.txtDate);
-        txtNotes = (TextView)findViewById(R.id.txtNotes);
+		btnPrevious = (Button) findViewById(R.id.btnPrevious);
+        txtKomi = (EditText)findViewById(R.id.txtKomi);
+        txtDate = (EditText)findViewById(R.id.txtDate);
+        txtNotes = (EditText)findViewById(R.id.txtNotes);
         radioWhite = (RadioButton)findViewById(R.id.radioWhite);
         radioBlack = (RadioButton)findViewById(R.id.radioBlack);
         spinnerWeight = (Spinner)findViewById(R.id.spinnerWeight);
         spinnerHandicap = (Spinner)findViewById(R.id.spinnerHandicap);
 
         addChangeButtonListener();
+        addPreviousButtonListener();
         addSaveResultButtonListener();
         addSpinnerHandicapOnItemSelectedListener();
         
@@ -74,6 +80,19 @@ public class CaptureDetailActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				showDialog(DATE_DIALOG_ID);
+			}
+		});
+	}
+
+	public void addPreviousButtonListener() {
+		btnPrevious.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				SharedPreferences preferences = getSharedPreferences("SETTINGS", 0);
+				String notes = preferences.getString("notes", "");
+				if (notes.length()>0) {
+					txtNotes.setText(notes);
+				}
 			}
 		});
 	}
@@ -126,6 +145,12 @@ public class CaptureDetailActivity extends Activity {
 		}
 		Result.handicap = String.valueOf(spinnerHandicap.getSelectedItemPosition()+1);
 		Result.notes = txtNotes.getText().toString();
+		if (Result.notes.length()>0) {
+			SharedPreferences preferences = getSharedPreferences("SETTINGS", 0);
+			Editor editor = preferences.edit();
+			editor.putString("notes", Result.notes);
+			editor.commit();
+		}
 	}
 	
 	private String addLeadingZero(String input) {

@@ -1,10 +1,12 @@
 package za.co.sagoclubs;
 
+import static za.co.sagoclubs.Constants.TAG;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -23,6 +25,8 @@ public class ResultConfirmActivity extends Activity {
 	
 	@Override
     public void onCreate(Bundle savedInstanceState) {
+		Log.d(TAG, "ResultConfirmActivity.onCreate");
+		
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
 
@@ -36,11 +40,10 @@ public class ResultConfirmActivity extends Activity {
         btnNewResult = (Button)findViewById(R.id.btnNewResult);
         btnReturnToStart = (Button)findViewById(R.id.btnReturnToStart);
 
-        btnUndo.setVisibility(View.INVISIBLE);
-        btnNewResult.setVisibility(View.INVISIBLE);
-        btnReturnToStart.setVisibility(View.INVISIBLE);
-
         if (Result.resultState == ResultState.Enter) {
+            btnUndo.setVisibility(View.INVISIBLE);
+            btnNewResult.setVisibility(View.INVISIBLE);
+            btnReturnToStart.setVisibility(View.INVISIBLE);
     		dialog.setMessage("Sending result to server...");
     		dialog.setIndeterminate(true);
     		dialog.setCancelable(false);
@@ -83,6 +86,12 @@ public class ResultConfirmActivity extends Activity {
 
 	}
 	
+//	@Override
+//	public void onPause() {
+//		super.onPause();
+//		dialog.dismiss();
+//	}
+	
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event)  {
 	    if (keyCode == KeyEvent.KEYCODE_BACK) {
@@ -115,7 +124,7 @@ public class ResultConfirmActivity extends Activity {
 
 	    protected void onPostExecute(String result) {
 	    	setProgressBarIndeterminateVisibility(false);
-	    	dialog.hide();
+	    	dialog.dismiss();
         	txtOutput.setText(result);
         	Result.setResultState(ResultState.Confirm);
             btnUndo.setVisibility(View.VISIBLE);

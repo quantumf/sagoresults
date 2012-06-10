@@ -18,16 +18,36 @@
             android:text="@string/player_ratings"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/btnSortByName"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Name" android:visibility="invisible"/>
+
+        <Button
+            android:id="@+id/btnSortByRank"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Rank" android:visibility="invisible"/>
 
     </LinearLayout>
 
-<ScrollView
-    android:id="@+id/SCROLLER_ID"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:scrollbars="vertical"
-    android:fillViewport="true">
+        <ListView
+            android:id="@+id/listView"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" />
     
-</ScrollView>
+    <ScrollView
+        android:id="@+id/SCROLLER_ID"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="vertical"
+        android:fillViewport="true">
+        
+        
+    </ScrollView>
 
 </LinearLayout>

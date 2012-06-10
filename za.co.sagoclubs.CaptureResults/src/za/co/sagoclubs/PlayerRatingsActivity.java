@@ -1,5 +1,7 @@
 package za.co.sagoclubs;
 
+import java.util.Arrays;
+
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -10,7 +12,10 @@ import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.ScrollView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -20,31 +25,53 @@ public class PlayerRatingsActivity extends Activity {
 
 	private ScrollView scrollView;
 	private ProgressDialog dialog;
-	private TableLayout table;
+	private ListView listView;
+	private Button btnSortByRank;
+	private Button btnSortByName;
+	private PlayerSortOrder preferredOrder = PlayerSortOrder.SORT_BY_RANK;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.player_ratings);
 
+        btnSortByRank = (Button)findViewById(R.id.btnSortByRank);
+        btnSortByName = (Button)findViewById(R.id.btnSortByName);
         scrollView = (ScrollView)findViewById(R.id.SCROLLER_ID);
+        listView = (ListView)findViewById(R.id.listView);
 
-        table = new TableLayout(this);  
-        
-        table.setStretchAllColumns(true);  
-        table.setShrinkAllColumns(true);
-        table.setBackgroundColor(Color.WHITE);
-      
+		updateList();
+
+    	btnSortByName.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				if (preferredOrder==PlayerSortOrder.SORT_BY_RANK) {
+					preferredOrder=PlayerSortOrder.SORT_BY_NAME;
+					updateList();
+				}
+			}
+    	});
+
+    	btnSortByRank.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				if (preferredOrder==PlayerSortOrder.SORT_BY_NAME) {
+					preferredOrder=PlayerSortOrder.SORT_BY_RANK;
+					updateList();
+				}
+			}
+    	});
+	}
+
+	private void updateList() {
 		dialog = new ProgressDialog(this);
-
 		dialog.setMessage("Retrieving player ratings...");
 		dialog.setIndeterminate(true);
-		dialog.setCancelable(false);
+		dialog.setCancelable(true);
 		dialog.show();
     	new PlayerRatingsTask().execute(this);
-
-    }
-
+	}
+	
 	@Override
 	public void onPause() {
 		super.onPause();
@@ -59,50 +86,30 @@ public class PlayerRatingsActivity extends Activity {
 		protected Player[] doInBackground(Context... v) {
 			context = v[0];
 			setProgressBarIndeterminateVisibility(true);
-	    	Player[] players = InternetActions.getPlayerRatingsArray();
+	    	Player[] players = InternetActions.getPlayerRatingsArray(PlayerSortOrder.SORT_BY_NAME);
         	return players;
 	    }
 
+		public OnItemClickListener playerItemClickListener = new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				Player p = (Player)listView.getItemAtPosition(position);
+				Result.setLogFile(p);
+	            Intent myIntent = new Intent(view.getContext(), LogFileActivity.class);
+	            startActivityForResult(myIntent, 0);
+			}
+		};
+		
 	    protected void onPostExecute(Player[] players) {
 	    	setProgressBarIndeterminateVisibility(false);
 	    	dialog.hide();
-	        for (Player player: players) {
-	            TableRow row = new TableRow(context);  
-	            final Button nameButton = new Button(context);
-	            nameButton.setTextColor(Color.BLACK);
-	            nameButton.setBackgroundColor(Color.WHITE);
-	            nameButton.setText(player.getName());
-	            nameButton.setGravity(Gravity.LEFT);
-	            nameButton.setHint(player.getId());
-	            nameButton.setOnClickListener(new OnClickListener() {
-        			@Override
-        			public void onClick(View v) {
-        				String id = nameButton.getHint().toString();
-        				String name = nameButton.getText().toString();
-        				name = name.substring(0, name.length());
-        				Result.setLogFile(new Player(id, name));
-        	            Intent myIntent = new Intent(v.getContext(), LogFileActivity.class);
-        	            startActivityForResult(myIntent, 0);
-        			}
-        		});
-	            row.addView(nameButton);
-	            TextView rank = new TextView(context);
-	            rank.setTextColor(Color.BLACK);
-	            rank.setBackgroundColor(Color.WHITE);
-	            rank.setText(player.getRank());
-	            rank.setGravity(Gravity.RIGHT);
-	            row.addView(rank);
-	            TextView index = new TextView(context);
-	            index.setTextColor(Color.BLACK);
-	            index.setBackgroundColor(Color.WHITE);
-	            index.setText(player.getIndex()+"   ");
-	            index.setGravity(Gravity.RIGHT);
-	            row.addView(index);
-	            table.addView(row);
-	        }
-	        scrollView.removeAllViews();
-	        scrollView.addView(table);
-//	        setContentView(table);        
+	        PlayerRatingArrayAdapter adapter = new PlayerRatingArrayAdapter(context,
+	                R.layout.player_rating_list_item, players);
+	        listView.setAdapter(adapter);
+	        listView.setOnItemClickListener(playerItemClickListener);
+	        
 	    }
 	}
 	

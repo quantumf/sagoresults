@@ -31,7 +31,9 @@
     <string name="player">Player</string>  
     <string name="select_player">Select Player</string>  
     <string name="display_log_file">Display Log File</string>  
-    <string name="player_ratings">Player Ratings</string>  
+    <string name="player_ratings">Player Ratings</string>
+    <string name="sort_by_name">Name</string>
+    <string name="sort_by_rank">Rank</string>
     
     <string-array name="weightlist">  
         <item>Free (0)</item>  

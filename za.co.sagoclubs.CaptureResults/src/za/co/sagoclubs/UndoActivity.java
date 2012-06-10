@@ -26,10 +26,14 @@ public class UndoActivity extends Activity {
         
 		dialog = new ProgressDialog(this);
 
+		btnReturnToStart = (Button)findViewById(R.id.btnReturnToStart);
+        btnNewResult = (Button)findViewById(R.id.btnNewResult);
 		txtOutput = (TextView)findViewById(R.id.txtOutput);
         txtOutput.setEnabled(false);
         
         if (Result.resultState == ResultState.Confirm) {
+            btnNewResult.setVisibility(View.INVISIBLE);
+            btnReturnToStart.setVisibility(View.INVISIBLE);
     		dialog.setMessage("Sending undo to server...");
     		dialog.setIndeterminate(true);
     		dialog.setCancelable(false);
@@ -37,8 +41,6 @@ public class UndoActivity extends Activity {
         	new UndoResultTask().execute();
         }
         
-        btnNewResult = (Button)findViewById(R.id.btnNewResult);
-
         btnNewResult.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -49,8 +51,6 @@ public class UndoActivity extends Activity {
 			}
 		});
 
-        btnReturnToStart = (Button)findViewById(R.id.btnReturnToStart);
-
         btnReturnToStart.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -59,9 +59,6 @@ public class UndoActivity extends Activity {
                 startActivityForResult(myIntent, 0);
 			}
 		});
-
-        btnNewResult.setVisibility(View.INVISIBLE);
-        btnReturnToStart.setVisibility(View.INVISIBLE);
 
         if(savedInstanceState!=null) {
             restoreProgress(savedInstanceState);
@@ -102,7 +99,7 @@ public class UndoActivity extends Activity {
 
 	    protected void onPostExecute(String result) {
 	    	setProgressBarIndeterminateVisibility(false);
-	    	dialog.hide();
+	    	dialog.dismiss();
         	txtOutput.setText(result);
         	Result.setResultState(ResultState.Complete);
             btnNewResult.setVisibility(View.VISIBLE);

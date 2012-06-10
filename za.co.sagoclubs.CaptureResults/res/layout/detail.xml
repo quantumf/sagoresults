@@ -155,7 +155,7 @@
                 android:prompt="@string/game_weight_prompt" />
 
         </TableRow>
-
+
         <TableRow
             android:id="@+id/tableRow3"
             android:layout_width="wrap_content"
@@ -165,20 +165,29 @@
                 android:id="@+id/TextView03"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
                 android:focusable="false"
                 android:text="@string/notes_text_label"
+                android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textColor="#000000"
-                android:textStyle="bold"
-                android:textAppearance="?android:attr/textAppearanceMedium" android:layout_gravity="center_vertical"/>
-
+                android:textStyle="bold" />
+
             <EditText
                 android:id="@+id/txtNotes"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:ems="10" >
 
                 <requestFocus />
             </EditText>
+
+            <Button
+                android:id="@+id/btnPrevious"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="P" />
 
         </TableRow>
 
