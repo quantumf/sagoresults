@@ -5,14 +5,17 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnKeyListener;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.TextView;
-
 import static za.co.sagoclubs.Constants.TAG;
 
 public class SettingsActivity extends Activity {
@@ -53,6 +56,26 @@ public class SettingsActivity extends Activity {
 			
 		});
 
+		CheckBox showPassword = (CheckBox) findViewById(R.id.chkShowPassword);
+		showPassword.setOnCheckedChangeListener(new OnCheckedChangeListener()
+		{
+			@Override
+			public void onCheckedChanged(CompoundButton arg0, boolean arg1) {
+				if(!arg1)
+					txtPassword.setTransformationMethod(new PasswordTransformationMethod());
+				else
+					txtPassword.setTransformationMethod(null);
+				txtPassword.refreshDrawableState();
+			}}
+		);
+		Button doneButton = (Button) findViewById(R.id.DoneButton);
+		doneButton.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View arg0) {
+				changed = true;
+				saveSettings();
+			}
+		});
 	}
 
 	public void onResume() {

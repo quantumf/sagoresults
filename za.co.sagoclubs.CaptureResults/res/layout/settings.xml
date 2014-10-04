@@ -8,9 +8,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#336699" >
-
-        <TextView
+        android:background="#336699">
+    <TextView
             android:id="@+id/txtUndoConfirmed"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -29,7 +28,7 @@
             android:id="@+id/tableRow1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" >
-
+
             <TextView
                 android:id="@+id/lblUserame"
                 android:layout_width="wrap_content"
@@ -38,7 +37,7 @@
                 android:textColor="#000000"
                 android:textStyle="bold"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
-
+
             <EditText
                 android:id="@+id/txtUsername"
                 android:layout_width="wrap_content"
@@ -54,7 +53,7 @@
             android:id="@+id/tableRow2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" >
-
+
             <TextView
                 android:id="@+id/lblPassword"
                 android:layout_width="wrap_content"
@@ -63,7 +62,7 @@
                 android:textColor="#000000"
                 android:textStyle="bold"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
-
+
             <EditText
                 android:id="@+id/txtPassword"
                 android:layout_width="wrap_content"
@@ -78,6 +77,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" >
 
+            <CheckBox
+                android:id="@+id/chkShowPassword"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Show Password" />
+        <TextView
+        android:id="@+id/textViewShowPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Show Password"
+        android:textAppearance="?android:attr/textAppearanceSmall"/>
+            
         </TableRow>
 
         <TableRow
@@ -85,15 +96,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" >
         </TableRow>
-    </TableLayout>
-
-    <TextView
+        </TableLayout>
+        <TextView
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Do not change the default values of &quot;guest&quot;/&quot;guest&quot; unless you have been given an admin account by an SA Go administrator"
         android:textAppearance="?android:attr/textAppearanceSmall" />
-
+
     <Button
         android:id="@+id/btnSelectFavouritePlayers"
         style="@style/ButtonText"
@@ -101,5 +111,11 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="@string/select_favourite_players" android:textStyle="bold"/>
+
+    <Button
+        android:id="@+id/DoneButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Save" />
 
 </LinearLayout>
