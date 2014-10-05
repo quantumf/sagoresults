@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -30,7 +31,15 @@ public class MainActivity extends Activity {
 	
 	@Override
     public void onCreate(Bundle savedInstanceState) {
+        //This is not recommended, but it's a quick way to avoid all the network exceptions
+        //Android 10+ doesn't allow network stuff on the UI thread
+        //This would require a significant re-architecture of the application
+        //Not justified just at the present
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.main);
         
         Result.setResultState(ResultState.Complete);

@@ -15,6 +15,7 @@ import java.util.List;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.util.Base64;
 import android.util.Log;
 import static za.co.sagoclubs.Constants.TAG;
@@ -214,7 +215,7 @@ public class InternetActions {
     private static List<String> getRawPlayerList() {
         HttpURLConnection c = openConnection("http://rank.sagoclubs.co.za/sed_script");
         BufferedReader reader = null;
-        ArrayList<String> list = new ArrayList<String>(); 
+        ArrayList<String> list = new ArrayList<String>();
         try {
             reader = new BufferedReader(new InputStreamReader(c.getInputStream(), "UTF-8"), 8192);
             for (String line; (line = reader.readLine()) != null;) {
@@ -230,7 +231,31 @@ public class InternetActions {
         }
         return list;
     }
-    
+
+//    private class RawPlayerListAsyncTask extends AsyncTask<Void, Void, List<String>> {
+//
+//        protected List<String> doInBackground(Void... voidParam) {
+//            HttpURLConnection c = openConnection("http://rank.sagoclubs.co.za/sed_script");
+//            BufferedReader reader = null;
+//            ArrayList<String> list = new ArrayList<String>();
+//            try {
+//                reader = new BufferedReader(new InputStreamReader(c.getInputStream(), "UTF-8"), 8192);
+//                for (String line; (line = reader.readLine()) != null;) {
+//                    list.add(line.trim());
+//                }
+//            } catch (UnsupportedEncodingException e) {
+//                e.printStackTrace();
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            } finally {
+//                if (reader != null) try { reader.close(); } catch (IOException logOrIgnore) {}
+//                c.disconnect();
+//            }
+//            return list;
+//        }
+//
+//    }
+//
     private static List<Player> getRawPlayerRatingsList() {
         HttpURLConnection c = openUnsecuredConnection("http://www.sagoclubs.co.za/player-ratings/");
         BufferedReader reader = null;

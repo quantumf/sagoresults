@@ -9,7 +9,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#336699" >
-
+
+
+
         <TextView
             android:id="@+id/txtSelectWhitePlayer"
             android:layout_width="wrap_content"
@@ -20,7 +22,12 @@
             android:textStyle="bold" />
 
     </LinearLayout>
-    <Button
+
+
+
+
+
+    <Button
         android:id="@+id/btnPlayerRatings"
         style="@style/ButtonText"
 		android:background="@drawable/magenta_button"
@@ -29,15 +36,6 @@
         android:text="@string/player_ratings" android:textStyle="bold"/>
 
     <Button
-        android:id="@+id/btnSettings"
-        style="@style/ButtonText"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/yellow_button"
-        android:text="@string/settings"
-        android:textStyle="bold" />
-    
-    <Button
         android:id="@+id/btnCaptureResult"
         style="@style/ButtonText"
 		android:background="@drawable/green_button"
@@ -45,7 +43,9 @@
         android:layout_height="wrap_content"
         android:text="@string/capture_result"
         android:textStyle="bold" />
-
+
+
+
     <Button
         android:id="@+id/btnDisplayLogFile"
         style="@style/ButtonText"
@@ -53,6 +53,14 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="@string/display_log_file"
+        android:textStyle="bold" />
+    <Button
+        android:id="@+id/btnSettings"
+        style="@style/ButtonText"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/yellow_button"
+        android:text="@string/settings"
         android:textStyle="bold" />
 
 </LinearLayout>
