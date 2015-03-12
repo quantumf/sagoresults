@@ -1,4 +1,4 @@
-![Player view]({https://www.dropbox.com/s/rx42c6tjaagec47/Screenshot_2015-03-11-08-23-52.png} "Player View")
+![image](https://www.dropbox.com/s/rx42c6tjaagec47/Screenshot_2015-03-11-08-23-52.png?raw=true "Player View")
 
 SAGO Results
 ===========
