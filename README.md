@@ -1,4 +1,4 @@
-<center>![image](https://www.dropbox.com/s/rx42c6tjaagec47/Screenshot_2015-03-11-08-23-52.png?raw=true "Player View")</center>
+<center>![image](https://www.dropbox.com/s/de7zwosgzqrilz5/player_ratings.png?raw=true "Player View")</center>
 
 SAGO Results
 ===========
