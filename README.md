@@ -1,4 +1,4 @@
-<center>![Player view](https://www.dropbox.com/s/de7zwosgzqrilz5/player_ratings.png?raw=true)</center>
+![Player view](https://www.dropbox.com/s/de7zwosgzqrilz5/player_ratings.png?raw=true)
 
 SAGO Results
 ===========
