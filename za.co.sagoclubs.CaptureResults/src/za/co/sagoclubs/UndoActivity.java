@@ -93,7 +93,7 @@ public class UndoActivity extends Activity {
 			setProgressBarIndeterminateVisibility(true);
 
         	InternetActions.openPage(Result.constructUndoUri());
-        	String result = InternetActions.getPreBlock("http://rank.sagoclubs.co.za/refresh.html");
+        	String result = InternetActions.getPreBlock(Constants.REFRESH_HTML);
         	return result;
 	    }
 

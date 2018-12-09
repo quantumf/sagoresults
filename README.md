@@ -1,4 +1,4 @@
-<center>![image](https://www.dropbox.com/s/de7zwosgzqrilz5/player_ratings.png?raw=true "Player View")</center>
+<center>![Player view](https://www.dropbox.com/s/de7zwosgzqrilz5/player_ratings.png?raw=true)</center>
 
 SAGO Results
 ===========
@@ -8,7 +8,11 @@ An android app to capture SA Go results
 Change Log
 ===========
 
-v2.2 (release pending)
+v3.0 (09/12/2018)
+
+Updated to work with new web site
+
+v2.2 (not released)
 
 * Migrated to Android 4.2.2
 * Optionally show password (John Leuner)

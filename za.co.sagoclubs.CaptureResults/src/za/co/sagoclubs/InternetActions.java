@@ -15,7 +15,6 @@ import java.util.List;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
-import android.os.AsyncTask;
 import android.util.Base64;
 import android.util.Log;
 import static za.co.sagoclubs.Constants.TAG;
@@ -152,6 +151,7 @@ public class InternetActions {
     }
 
     public static String getPreBlock(String url) {
+		Log.d(TAG, "opening " + url);
     	HttpURLConnection c = openConnection(url);
         BufferedReader reader = null;
         String result= "";
@@ -213,7 +213,7 @@ public class InternetActions {
     }
     
     private static List<String> getRawPlayerList() {
-        HttpURLConnection c = openConnection("http://rank.sagoclubs.co.za/sed_script");
+        HttpURLConnection c = openConnection(Constants.SED_SCRIPT);
         BufferedReader reader = null;
         ArrayList<String> list = new ArrayList<String>();
         try {
@@ -257,17 +257,17 @@ public class InternetActions {
 //    }
 //
     private static List<Player> getRawPlayerRatingsList() {
-        HttpURLConnection c = openUnsecuredConnection("http://www.sagoclubs.co.za/player-ratings/");
+        HttpURLConnection c = openUnsecuredConnection(Constants.PLAYER_RATINGS);
         BufferedReader reader = null;
     	List<Player> list = new ArrayList<Player>();
         try {
             reader = new BufferedReader(new InputStreamReader(c.getInputStream(), "UTF-8"), 8192);
             for (String line; (line = reader.readLine()) != null;) {
-            	if (line.startsWith("<td><a href='/wp-content/playerrank.php?id=")) {
+            	if (line.contains("<a href='showlog.cgi?name=")) {
             		Player player = getPlayerFromRatingLine(line);
-                	player.setRank(stripTD(reader.readLine().trim()));
-                	player.setIndex(stripTD(reader.readLine().trim()));
-                	player.setLastPlayedDate(stripTD(reader.readLine().trim()));
+//                	player.setRank(stripTD(reader.readLine().trim()));
+//                	player.setIndex(stripTD(reader.readLine().trim()));
+//                	player.setLastPlayedDate(stripTD(reader.readLine().trim()));
                 	list.add(player);
             	}
             }
@@ -286,12 +286,31 @@ public class InternetActions {
     	String result = line.substring(4, line.indexOf("</td>"));
     	return result;
     }
-    
+
+
+
+
     private static Player getPlayerFromRatingLine(String line) {
-    	String id = line.substring(43, line.indexOf("'",43));
-    	int nameIndexStart = line.indexOf("<img src='/wp-content/archive.gif' alt='' /></a>", 43)+48;
-    	String name = line.substring(nameIndexStart, line.indexOf("</td>", nameIndexStart));
+	    line = line.substring(line.indexOf("</td><td>") + 9);
+        String name = line.substring(0, line.indexOf("</td><td>"));
+        line = line.substring(line.indexOf("</td><td>") + 9);
+        String rank = line.substring(0, line.indexOf("</td><td>"));
+        line = line.substring(line.indexOf("</td><td>") + 9);
+        String index = line.substring(0, line.indexOf("</td><td>"));
+        line = line.substring(line.indexOf("</td><td>") + 9);
+        String lastPlayeDate = line.substring(0,line.indexOf("</td><td>"));
+        line = line.substring(line.indexOf("<a href='showlog.cgi?name=") + 26);
+        String id = line.substring(0,line.indexOf("'><img src='images/archive.gif"));
+
+//	    String id = line.substring(line.indexOf("<a href='showlog.cgi?name=")+1,line.indexOf("'><img src='images/archive.gif'"));
+//    	String id = line.substring(43, line.indexOf("'",43));
+//    	int nameIndexStart = line.indexOf("<img src='/wp-content/archive.gif' alt='' /></a>", 43)+48;
+//        String name = line.substring(nameIndexStart, line.indexOf("</td>", nameIndexStart));
+
     	Player result = new Player(id, name);
+        result.setRank(rank);
+        result.setIndex(index);
+        result.setLastPlayedDate(lastPlayeDate);
     	return result;
     }
     

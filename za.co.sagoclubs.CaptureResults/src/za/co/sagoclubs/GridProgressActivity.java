@@ -6,6 +6,7 @@ import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.widget.TextView;
 
+import static za.co.sagoclubs.Constants.SHOWLOG_CGI;
 import static za.co.sagoclubs.Constants.TAG;
 
 public class GridProgressActivity extends Activity {
@@ -29,7 +30,7 @@ public class GridProgressActivity extends Activity {
         } else {
             Log.d(TAG, "Calling server to get player logfile");
             txtPlayer.setText(Result.logfile.getName());
-        	String result = InternetActions.getPreBlock("http://rank.sagoclubs.co.za/showlog.cgi?name="+Result.logfile.getId());
+        	String result = InternetActions.getPreBlock(SHOWLOG_CGI + "?name="+Result.logfile.getId());
         	txtOutput.setMovementMethod(new ScrollingMovementMethod());
         	txtOutput.setText(result);
         }

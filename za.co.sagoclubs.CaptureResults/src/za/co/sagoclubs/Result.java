@@ -49,7 +49,7 @@ public class Result {
 	}
 
 	public static String constructResultUri() {
-		String uri ="http://rank.sagoclubs.co.za/loggame.cgi?";
+		String uri = Constants.LOGGAME_CGI + "?";
 		uri = uri + "whitename="+Result.white.getId();
 		uri = uri + "&blackname="+Result.black.getId();
 		uri = uri + "&GSF="+Result.weight;
@@ -68,7 +68,7 @@ public class Result {
 	}
 	
 	public static String constructUndoUri() {
-		String uri ="http://rank.sagoclubs.co.za/undo.cgi?";
+		String uri = Constants.UNDO_CGI + "?";
 		uri += "a="+white.getId();
 		uri += "&b="+black.getId();
 		return uri;

@@ -2,7 +2,6 @@ package za.co.sagoclubs;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
@@ -82,8 +81,9 @@ public class LogFileActivity extends Activity {
 	private class LogFileTask extends AsyncTask<Void, Void, String> {
 		protected String doInBackground(Void... v) {
 			setProgressBarIndeterminateVisibility(true);
-        	//String result = InternetActions.getPreBlock("http://rank.sagoclubs.co.za/showlog.cgi?name="+Result.logfile.getId());
-        	String result = InternetActions.getPreBlock("http://rank.sagoclubs.co.za/datafiles/"+Result.logfile.getId()+".recordsheet");
+
+        	String result = InternetActions.getPreBlock("http://rank.sagoclubs.co.za/showlog.cgi?name="+Result.logfile.getId());
+        	//String result = InternetActions.getPreBlock(Constants.DATAFILES + Result.logfile.getId()+".recordsheet");
         	return result;
 	    }
 
